@@ -2,6 +2,7 @@ const path = require('path');
 const html = require('html-webpack-plugin');
 const merge = require('webpack-merge');
 const parts = require('./webpack.parts');
+const copy = require('copy-webpack-plugin');
 
 const paths = {
   APP: path.join(__dirname, 'app'),
@@ -19,14 +20,21 @@ const commonConfig = merge([
     plugins: [
       new html({
         title: 'Boilerplate',
-      }),
-    ],
+        }),
+      new copy([
+          {
+              from: path.join(paths.SRC, '/images'),
+              to: path.join(paths.DIST, 'images')
+          }
+      ])
+    ]
   },
-  parts.lintJavaScript({ include: paths.APP }),  
+  //parts.lintJavaScript({ include: paths.APP }),  
 ]);
 
 const productionConfig = merge([
-    parts.extractCSS({ use: 'css-loader' })
+    parts.extractCSS({ use: 'css-loader' }),    
+    parts.loadImages()
 ]);
 
 const developmentConfig = merge([
@@ -36,6 +44,7 @@ const developmentConfig = merge([
     port: process.env.PORT,
     }),
   parts.loadCSS(),
+  parts.loadImages()
 ]);
 
 module.exports = (env) => {

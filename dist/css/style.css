@@ -1,5 +1,5 @@
 body {
-  background: black;
+  background: white url("/images/dev-placeholder.png");
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

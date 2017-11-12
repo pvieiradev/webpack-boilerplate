@@ -1,7 +1,7 @@
 @import 'common/variables';
 
 body {
-    background: $primary-color;
+    background: $secondary-color url('/images/dev-placeholder.png'); 
     display: flex;
     transition: all .5s;
 }

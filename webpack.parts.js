@@ -31,7 +31,6 @@ exports.lintJavaScript = ({ include, exclude, options }) => ({
                 include,
                 exclude,
                 enforce: 'pre',
-
                 loader: 'eslint-loader',
                 options,
             },
@@ -74,3 +73,35 @@ exports.extractCSS = ({ include, exclude, use }) => {
     };
 };
 
+
+exports.loadImages = ({ include, exclude, options } = {}) => ({
+    module: {
+        rules: [
+            {
+                test: /\.(jpe?g|png|gif|svg)$/,
+                include,
+                exclude,
+                loader: ['file-loader', 'image-webpack-loader'],
+                options
+             },
+        ],
+    },
+});
+
+/*
+exports.loadImages = ({ include, exclude, options } = {}) => ({
+  module: {
+    rules: [
+        {        
+        test: /\.(jpe?g|png|gif|svg)$/,
+        include,
+        exclude,
+        use: {
+          loader: 'url-loader',
+          options,
+        },
+      },
+    ],
+  },
+});
+*/
